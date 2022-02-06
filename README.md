@@ -1,1 +1,1 @@
-# django_nextjs_auth
+# Django and Nextjs server side JWT authentication with httpOnly Cookies
