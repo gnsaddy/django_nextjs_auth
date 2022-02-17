@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+   backend_nginx:
+      build:
+         dockerfile: Dockerfile
+         context: ./nginx
+         network: host
+      container_name: backend_nginx
+      restart: always
+      volumes:
+         - static_volume:/app/backend/static
+      ports:
+         - 8001:8001
+      depends_on:
+         - backend_api
+
+   backend_api:
+      restart: always
+      container_name: backend_api
+      build:
+         context: .
+         network: host
+         dockerfile: ./backend/Dockerfile
+      entrypoint: /app/backend/entrypoint.sh
+      ports:
+         - 8003:8003
+      volumes:
+         - ./backend/:/app/backend
+         - static_volume:/app/backend/static/
+      env_file:
+         - ./backend/.env
+      expose:
+         - 8003
+
+volumes:
+   static_volume:
