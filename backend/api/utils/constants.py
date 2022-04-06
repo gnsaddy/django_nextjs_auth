@@ -21,10 +21,10 @@ def SuccessJson(status=None, message=None, data=None, statusCode=None):
     })
 
 
-def ErrorJson(status=None, message=None, data=None, statusCode=None):
+def ErrorJson(status=None, message=None, data=None, statuscode=None):
     return JsonResponse({
         "status": str(status),
         "message": str(message),
         "data": data,
-        "status_code": int(statusCode)
+        "status_code": int(statuscode)
     })
